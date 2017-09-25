@@ -1,0 +1,12 @@
+附件包括11个文件，分别为：
+(1)check.m                  % CTOC9乙组验证程序主函数
+(2)city.txt                 % 中国108个城市的经纬度坐标和权重
+(3)carry.txt                % 100次搭载任务的轨道根数
+(4)constellationFormat.txt  % 星座格式文件
+(5)transferFormat.txt       % 轨道转移格式文件
+(6)jday.m                   % 通过年月日时分秒计算儒略日JD
+(7)gstime.m                 % 通过儒略日JD计算格林威治恒星时(注意MJD2000需要转换为JD)
+(8)getGDOP.m                % 通过地面站和可视卫星的位置计算GDOP
+(9)constellation.txt        % 星座示例文件
+(10)transfer.txt            % 轨道转移示例文件
+(11)说明.txt                % CTOC9乙组验证程序附件说明
