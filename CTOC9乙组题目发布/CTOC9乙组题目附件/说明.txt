@@ -1,0 +1,11 @@
+附件包括8个文件，分别为：
+(1)city.txt                 % 中国108个城市的经纬度坐标和权重
+(2)carry.txt                % 100次搭载任务的轨道根数
+(3)constellationFormat.txt  % 星座示例文件
+(4)transferFormat.txt       % 轨道转移示例文件
+(5)jday.m                   % 通过年月日时分秒计算儒略日JD
+(6)gstime.m                 % 通过儒略日JD计算格林威治恒星时(注意MJD2000需要转换为JD)
+(7)getGDOP.m                % 通过地面站和可视卫星的位置计算GDOP
+(8)说明.txt
+
+此外，验证程序check.m将在开赛后一周内提供
