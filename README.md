@@ -1,4 +1,4 @@
-# CTOC-9（非官方页面）
+# CTOC9（转载官方公众号信息）
 
 数据来自 CTOC 官方公众号 **`CTOC_Official`**
 
