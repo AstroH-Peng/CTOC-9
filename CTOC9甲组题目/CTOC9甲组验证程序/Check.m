@@ -106,10 +106,21 @@ for ii = 1 : data(end,2) % data(end,2)是子任务个数
     Sat2 = SubTask(find(SubTask(:,4) == 2),:);
     Sat3 = SubTask(find(SubTask(:,4) == 3),:);
     
-    %Orbit函数实现分段轨道积分，检测位置、速度、质量精度，提取轨道和监测状态点信息
+    %Orbit函数实现分段轨道积分，检测位置、速度、质量精度和轨道高度，提取轨道和监测状态点信息
     [TH1, RVH1, Tobv10, Tobv1f, RVobv10] = Orbit(T10, RV10, m10, Sat1, options, ii, 1);
+    if any((sqrt(RVH1(:,1).^2 + RVH1(:,2).^2 + RVH1(:,3).^2) - Re) <300) == 1
+        fprintf('第 %d 个子任务中 卫星 %d 轨道高度小于 300 km\n', ii, 1);
+    end
+    
     [TH2, RVH2, Tobv20, Tobv2f, RVobv20] = Orbit(T20, RV20, m20, Sat2, options, ii, 2);
+    if any((sqrt(RVH2(:,1).^2 + RVH2(:,2).^2 + RVH2(:,3).^2) - Re) <300) == 1
+        fprintf('第 %d 个子任务中 卫星 %d 轨道高度小于 300 km\n', ii, 2);
+    end
+    
     [TH3, RVH3, Tobv30, Tobv3f, RVobv30] = Orbit(T30, RV30, m30, Sat3, options, ii, 3);
+    if any((sqrt(RVH3(:,1).^2 + RVH3(:,2).^2 + RVH3(:,3).^2) - Re) <300) == 1
+        fprintf('第 %d 个子任务中 卫星 %d 轨道高度小于 300 km\n', ii, 1);
+    end
     
     % 检验各监测卫星进出波束时间的一致性
     if Tobv10 ~= Tobv20 || Tobv10 ~= Tobv30

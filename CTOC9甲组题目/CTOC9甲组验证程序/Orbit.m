@@ -51,10 +51,6 @@ for jj = 1 : size(Sat,1)
         deltam = m0 * (1- exp( - deltaV / (Isp * ge)));
         mf = m0 - deltam;
         testRVM(TaskNo, SatNo, jj, yy(end,1:3), Sat(jj,5:7), yy(end,4:6), Sat(jj,8:10) - Sat(jj,12:14), mf, Sat(jj,11));
-        ele = RV2Ele(Sat(jj,5:10), mu);
-        if ele(1)*(1-ele(2)) - Re < 300
-            fprintf('第 %d 个子任务中 卫星 %d 在第 %d 行轨道高度小于 300 km\n', TaskNo, SatNo, jj);
-        end
         Count3 = Count3 + 1;  
     % ==================  eventID = 1  ====================================  
     elseif Sat(jj,15) == 1
