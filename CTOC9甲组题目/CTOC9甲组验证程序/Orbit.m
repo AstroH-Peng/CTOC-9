@@ -34,9 +34,13 @@ if any(diff(Ttemp)<0)
 end
 
 % ÖðÐÐ»ý·Ö
-for jj = 1 : size(Sat,1)
+for jj = 1 : size(Sat,1)    
     tspan = [T0,Sat(jj,3)];
-    if tspan(2) - tspan(1) == 0
+    if (tspan(2) - tspan(1) == 0)  & (Sat(jj,15) == 1)
+        Tobv0  = Sat(jj,3);
+        RVobv0 = Sat(jj,5:10);
+        continue;
+    elseif (tspan(2) - tspan(1) == 0)
         Tobvf = Sat(jj,3);
         continue;
     end
