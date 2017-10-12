@@ -61,15 +61,15 @@ for jj = 1:length(TN)
 
         % 检测监测卫星是否在波束内
         Angle1 = acos( dot(Rgi, Beam) / (norm(Rgi) * norm(Beam)));
-        if Angle1 * 180 / pi > 0.5 
-            fprintf('第 %d 次子任务中 第 %d 颗监测卫星不在波束圆锥内\n',TaskNo, kk);
-        end
+%         if Angle1 * 180 / pi > 0.5 
+%             fprintf('第 %d 次子任务中 第 %d 颗监测卫星不在波束圆锥内\n',TaskNo, kk);
+%         end
         
         % 检测监测卫星与GEO卫星是否在地球同侧 
         Angle2 = acos( dot(Ri, rGEO_J2000) / (norm(Ri) * norm(rGEO_J2000)));
-        if Angle2 * 180 / pi  > 90
-            fprintf('第 %d 次子任务中 第 %d 颗监测卫星与GEO卫星不在同侧\n',TaskNo, kk);
-        end        
+%         if Angle2 * 180 / pi  > 90
+%             fprintf('第 %d 次子任务中 第 %d 颗监测卫星与GEO卫星不在同侧\n',TaskNo, kk);
+%         end        
     end
     
     % 计算监测收益

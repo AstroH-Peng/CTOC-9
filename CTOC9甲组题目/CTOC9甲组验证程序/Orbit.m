@@ -36,9 +36,23 @@ end
 % ÖðÐÐ»ý·Ö
 for jj = 1 : size(Sat,1)    
     tspan = [T0,Sat(jj,3)];
-    if (tspan(2) - tspan(1) == 0)  & (Sat(jj,15) == 1)
+    if (tspan(2) - tspan(1) == 0)  && (Sat(jj,15) == 1)
         Tobv0  = Sat(jj,3);
         RVobv0 = Sat(jj,5:10);
+        continue;
+    elseif (tspan(2) - tspan(1) == 0)  && (Sat(jj,15) == 3)
+        Tobv0  = Sat(jj,3);
+        RVobv0 = Sat(jj,5:10);
+        deltaV = norm(Sat(jj,12:14));
+        deltam = m0 * (1- exp( - deltaV / (Isp * ge)));
+        mf = m0 - deltam;
+        testRVM(TaskNo, SatNo, jj, RV0(1:3), Sat(jj,5:7), RV0(4:6), Sat(jj,8:10) - Sat(jj,12:14), mf, Sat(jj,11));
+        Count3 = Count3 + 1; 
+        
+        T0 = Sat(jj,3);
+        RV0 = Sat(jj,5:10);
+        m0 = Sat(jj,11);
+        
         continue;
     elseif (tspan(2) - tspan(1) == 0)
         Tobvf = Sat(jj,3);

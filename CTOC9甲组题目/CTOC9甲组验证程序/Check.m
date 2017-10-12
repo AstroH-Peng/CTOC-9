@@ -91,6 +91,9 @@ fprintf('=======================================================================
 T10 = 0;
 T20 = 0;
 T30 = 0;
+T1End = -1;
+T2End = -1;
+T3End = -1;
 RV10 = rv0(1,:);
 RV20 = rv0(2,:);
 RV30 = rv0(3,:);
@@ -105,6 +108,16 @@ for ii = 1 : data(end,2) % data(end,2)是子任务个数
     Sat1 = SubTask(find(SubTask(:,4) == 1),:); % 读取子任务ii中各监测卫星的所有数据，分别赋给Sat1、Sat2、Sat3
     Sat2 = SubTask(find(SubTask(:,4) == 2),:);
     Sat3 = SubTask(find(SubTask(:,4) == 3),:);
+    
+    if Sat1(find(Sat1(:,15)==1),3) == T1End
+        disp('监测卫星1在上一个子任务出波束时间不可与当前子任务进波束时间相同')
+    end
+    if Sat2(find(Sat2(:,15)==1),3) == T2End
+        disp('监测卫星2在上一个子任务出波束时间不可与当前子任务进波束时间相同')
+    end
+    if Sat3(find(Sat3(:,15)==1),3) == T3End
+        disp('监测卫星3在上一个子任务出波束时间不可与当前子任务进波束时间相同')
+    end
     
     %Orbit函数实现分段轨道积分，检测位置、速度、质量精度和轨道高度，提取轨道和监测状态点信息
     [TH1, RVH1, Tobv10, Tobv1f, RVobv10] = Orbit(T10, RV10, m10, Sat1, options, ii, 1);
@@ -194,6 +207,10 @@ for ii = 1 : data(end,2) % data(end,2)是子任务个数
     GEOgain(GEONo) = GEOgain(GEONo) + GainProv;
     
     % 当前子任务的末状态赋值为下一个子任务的初状态
+
+    T1End = Sat1(find(Sat1(:,15)==2),3);
+    T2End = Sat2(find(Sat2(:,15)==2),3);
+    T3End = Sat3(find(Sat3(:,15)==2),3);
     T10 = TH1(end);
     T20 = TH2(end);
     T30 = TH3(end);
@@ -202,8 +219,9 @@ for ii = 1 : data(end,2) % data(end,2)是子任务个数
     RV30 = RVH3(end,:);
     m10 = Sat1(end,11);
     m20 = Sat2(end,11);
-    m30 = Sat3(end,11);
-    
+    m30 = Sat3(end,11);    
+
+
     fprintf('第 %d / %d 个子任务验证结束 \n\n', ii, data(end,2)) % data(end,2)是子任务个数
 end
 
